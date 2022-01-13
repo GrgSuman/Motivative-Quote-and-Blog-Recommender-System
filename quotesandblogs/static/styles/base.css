@@ -1,0 +1,140 @@
+*{
+    margin: 0;padding: 0;box-sizing: border-box;
+    /* font-family: 'Roboto', sans-serif; */
+    font-family: 'PT Sans', sans-serif;
+    text-decoration: none;
+}
+
+body{
+    background: #eeeeee6e;
+} 
+
+
+
+/* ===========common styles=================== */
+.title__{
+    padding-left: 12%;
+    margin: 2rem 0;
+    font-weight: 400;
+    font-size: 1.5rem;
+}
+
+.title___{
+    padding:2rem 12%;
+    margin:  0;
+    font-weight: 400;
+    background-color: white;
+    font-size: 1.5rem;
+}
+/* ================common styles end======================= */
+
+
+
+
+/* ==================header starts====================================== */
+header{
+    /* background: #CD0000; */
+    /* background: #e12400d6; */
+    background: #3524b5;
+    padding: 0.5rem 12%;
+    display: flex;
+    align-items: center;
+    height: 52px;
+    position: sticky;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 999;
+}
+
+
+
+
+header h1 a{color: white;}
+
+header h1{
+    font-size: 1.3rem;
+    /* font-weight: 500; */
+    letter-spacing: 0.03em;
+}
+
+.big{
+     font-family: 'Oswald', sans-serif;
+}
+
+nav{
+    display: flex;
+    align-items: center;
+}
+
+.big_nav{
+    display: flex;
+    margin-left: 4rem;
+
+}
+.big_nav li{
+    list-style: none;
+    padding: 0.5rem 1rem;
+}
+.big_nav li a{
+    color: rgba(255, 255, 255, 0.9);
+} 
+
+.big_nav li a:hover{
+    color: rgba(255, 255, 255);
+}
+/* ==================header ends====================================== */
+
+
+
+
+/* ==============================footerstylestarts======================================== */
+footer{
+    background: white;
+    padding: 3rem 12%;
+    display: flex;
+}
+
+.logo_quote{
+    flex: 1;
+}
+
+.logo_quote a{
+    color: black;
+}
+.logo_quote p{
+    color: gray;
+    margin: 1rem 0;
+}
+
+.site_links{
+    flex: 1;
+    padding-left: 20%;
+}
+
+.site_links a{
+    display: block;
+    margin: 0.8rem 0;
+}
+
+.connect_us{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    margin-left: 10%;
+}
+
+.site_links h3,.connect_us h3{
+    font-weight: 500;
+}
+
+.socials a{
+    display: block;
+    margin: 1rem 0;
+    margin-right: 2rem;
+    font-size: 1.1rem;
+}
+.socials{
+    display: flex;
+}
+/* ==============================footerstyleends======================================== */

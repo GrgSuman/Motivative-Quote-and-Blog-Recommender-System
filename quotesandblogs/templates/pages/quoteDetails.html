@@ -1,0 +1,27 @@
+{%extends "base.html"%}
+{%load static%}
+{%block title%}Motivative Quotes{%endblock%}
+
+{%block styles%}<link rel="stylesheet" href="{%static "styles/quoteDetails.css"%}?{% now "U" %}">{%endblock%}
+
+{%block mainContent%}
+<article class="myArticle">
+<div class="quoteImg">
+    <div class="overlay"></div>
+    <img class="featuredImage" src="https://images.unsplash.com/photo-1497561813398-8fcc7a37b567?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="">
+    <div class="txt">
+    <h1>
+        There are two types of people who will tell you that you cannot make a difference in this world: those who are afraid to try and those who are afraid you will succeed.
+        <br> <br>
+          - Ray Goforth
+    </h1>
+    </div>
+</div>
+<div class="buttons">
+    <button>Copy <i class="far fa-copy"></i></button>
+    <button class="secondbtn_">Download Image <i class="fas fa-download"></i></button>
+    <button >Edit Quote <i class="fas fa-edit"></i></button>
+</div>
+</article>
+
+{%endblock%}

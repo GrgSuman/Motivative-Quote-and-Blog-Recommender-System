@@ -1,0 +1,362 @@
+{%extends "base.html"%}
+{%load static%}
+
+{%block title%}otivative Quotes{%endblock%}
+
+{%block styles%}<link rel="stylesheet" href="{%static "styles/index.css"%}?{% now "U" %}">{%endblock%}
+
+{%block mainContent%}
+
+<h3 class="title__">Popular Quotes Category</h3>
+
+<section class="myCategoriesList">
+
+   <div class="gridCategory commonDivs">
+    {%for quoteCategory in myCategories%}
+    <div class="categoryBox" data-category={{quoteCategory.slug}}>
+        <!-- <img src="{%static "images/category/balloon.png"%}" alt="birthday category wishes"> -->
+        <img src="{{quoteCategory.img.url}}" alt="birthday category wishes">
+        <h3>{{quoteCategory.name}}</h3>
+    </div>
+    {%endfor%}
+   </div>
+
+   <div class="adsSection">
+
+    <form action="" class="search_form">
+        <input type="text" placeholder="funny quotes..">
+        <button><i class="fas fa-search"></i> </button>
+    </form>
+
+    <div class="adsContainer">
+        <!-- <img src="{%static "images/thumbnails/ads.png"%}" alt=""> -->
+        <lottie-player src="https://assets2.lottiefiles.com/private_files/lf30_hlzxxlfs.json"  background="transparent"  speed="1"  style="width: 300px; height: 300px;"  loop  autoplay></lottie-player>
+    </div>
+
+   </div>
+
+</section>
+
+
+<section class="newsletter">
+    <h3>Subscribe to us</h3>
+    <p>Stay motivated, get daily quotes straight to your email for free</p>
+    <form action="" class="newsForm">
+        <input type="text" placeholder="Your name">
+        <input type="email" placeholder="Your favourite email">
+        <button type="submit">Subscribe</button>
+    </form>
+</section>
+
+<!-- Most Loved Quotes -->
+
+<h3 class="title__">Most Loved Quotes</h3>
+
+<main class="lovedquotes">
+ 
+    <div class="quote">
+    <section class="quoteWithImage"  data-quote-slug="quote-slug">
+     <img src="{%static "images/category/left-quote.png"%}" alt="" class="quoteImg">
+     <p class="myquote">"Opportunities don't happen. You create them."</p>
+    </section>
+     <div class="copylike">
+        <button class="like_">15K <i class="far fa-heart"></i> </button>
+        <button class="copy_">COPY <i class="far fa-copy"></i>  </button>
+    </div>
+    </div>
+    
+    <div class="quote">
+    <section class="quoteWithImage"  data-quote-slug="quote-slug">
+     <img src="{%static "images/category/left-quote.png"%}" alt="" class="quoteImg">
+     <p class="myquote">"Try not to become a man of success. Rather become a man of value."</p>
+    </section>
+     <div class="copylike">
+         <button class="like_">105K <i class="far fa-heart"></i> </button>
+         <button class="copy_">COPY <i class="far fa-copy"></i> </button>
+     </div>
+    </div>
+
+    <div class="quote">
+    <section class="quoteWithImage"  data-quote-slug="quote-slug">
+     <img src="{%static "images/category/left-quote.png"%}" alt="" class="quoteImg">
+     <p class="myquote">"When something is important enough, you do it even if the odds are not in your favor."</p>
+    </section>
+     <div class="copylike">
+        <button class="like_">198K <i class="far fa-heart"></i> </button>
+        <button class="copy_">COPY <i class="far fa-copy"></i> </button>
+    </div>
+    </div>
+
+    <div class="quote">
+    <section class="quoteWithImage"  data-quote-slug="quote-slug">
+     <img src="{%static "images/category/left-quote.png"%}" alt="" class="quoteImg">
+     <p class="myquote">"True happiness is not expensive. If it requires high price it’s a fake."</p>
+    </section>
+     <div class="copylike">
+        <button class="like_">105K <i class="far fa-heart"></i> </button>
+        <button class="copy_">COPY <i class="far fa-copy"></i> </button>
+    </div>
+    </div>
+
+
+    <div class="quote">
+     <section class="quoteWithImage" data-quote-slug="quote-slug">
+     <img src="{%static "images/category/left-quote.png"%}" alt="" class="quoteImg">
+     <p class="myquote">"The secret of success is to know something nobody else knows."</p>
+     </section>
+     <div class="copylike">
+        <button class="like_">157K <i class="far fa-heart"></i> </button>
+        <button class="copy_">COPY <i class="far fa-copy"></i> </button>
+    </div>
+    </div>
+
+
+    <div class="quote">
+        <section  class="quoteWithImage"  data-quote-slug="quote-slug">
+        <img src="{%static "images/category/left-quote.png"%}" alt="" class="quoteImg">
+        <p class="myquote">"Don’t raise your voice, Improve your argument."</p>
+        </section>
+        <div class="copylike">
+           <button class="like_">1K <i class="far fa-heart"></i> </button>
+           <button class="copy_">COPY <i class="far fa-copy"></i> </button>
+       </div>
+       </div>
+
+
+       <div class="quote">
+        <section class="quoteWithImage" data-quote-slug="quote-slug">
+        <img src="{%static "images/category/left-quote.png"%}" alt="" class="quoteImg">
+        <p class="myquote">"If you want to make your dreams come true, The first thing you have to do is wake up."</p>
+        </section>
+        
+        <div class="copylike">
+           <button class="like_">17K <i class="far fa-heart"></i> </button>
+           <button class="copy_">COPY <i class="far fa-copy"></i> </button>
+       </div>
+       </div>
+</main>
+
+
+<div class="explore_more">
+    <button>Explore More</button>
+</div>
+
+<h3 class="title__">Recent Articles</h3>
+
+
+<section class="myCategoriesList">
+
+   <div class="commonDivs">
+
+    <article class="articleCard">
+
+        <h2><a href="{%url "blog-details" "blog-details"%}" class="classTitle">Motivation: How to get started and staying motivated</a></h2>
+        <div class="author_details">
+            <p> <span><i class="far fa-user"></i></span> <span>Suman Gurung</span>  </p>
+            <p class="articleDate"> <span><i class="far fa-clock"></i></span> <span>September 12, 2020</span></p>
+        </div>
+
+        <div class="article_details">
+            <a href="{%url "blog-details" "blog-details"%}"><img loading="lazy" src="{%static "images/thumbnails/1.jpg"%}" alt=""></a> 
+            <div>
+                <p>  Most people want to change at least one thing in their life. But it can be challenging to find the motivation just to make a start. It helps to understand what motivation means to you so you can find your own ways to get motivated.</p>
+                <a href="{%url "blog-details" "blog-details"%}" class="more">Read more</a>
+            </div>
+        </div>
+
+    </article>
+
+
+    <article class="articleCard">
+
+        <h2><a href="{%url "blog-details" "blog-details"%}" class="classTitle">Motivation: How to get started and staying motivated</a></h2>
+        <div class="author_details">
+            <p> <span><i class="far fa-user"></i></span> <span>Suman Gurung</span>  </p>
+            <p class="articleDate"> <span><i class="far fa-clock"></i></span> <span>September 12, 2020</span></p>
+        </div>
+
+        <div class="article_details">
+           <a href="{%url "blog-details" "blog-details"%}"><img loading="lazy" src="{%static "images/thumbnails/2.jpg"%}" alt=""></a> 
+            <div>
+                <p>  Most people want to change at least one thing in their life. But it can be challenging to find the motivation just to make a start. It helps to understand what motivation means to you so you can find your own ways to get motivated.</p>
+                <a href="{%url "blog-details" "blog-details"%}" class="more">Read more</a>
+            </div>
+        </div>
+
+    </article>
+
+    <article class="articleCard">
+
+        <h2><a href="{%url "blog-details" "blog-details"%}" class="classTitle">Motivation: How to get started and staying motivated</a></h2>
+        <div class="author_details">
+            <p> <span><i class="far fa-user"></i></span> <span>Suman Gurung</span>  </p>
+            <p class="articleDate"> <span><i class="far fa-clock"></i></span> <span>September 12, 2020</span></p>
+        </div>
+
+        <div class="article_details">
+            <a href="{%url "blog-details" "blog-details"%}"><img loading="lazy" src="{%static "images/thumbnails/3.jpg"%}" alt=""></a> 
+            <div>
+                <p>  Most people want to change at least one thing in their life. But it can be challenging to find the motivation just to make a start. It helps to understand what motivation means to you so you can find your own ways to get motivated.</p>
+                <a href="{%url "blog-details" "blog-details"%}" class="more">Read more</a>
+            </div>
+        </div>
+
+    </article>
+
+    <article class="articleCard">
+
+        <h2><a href="{%url "blog-details" "blog-details"%}" class="classTitle">Motivation: How to get started and staying motivated</a></h2>
+        <div class="author_details">
+            <p> <span><i class="far fa-user"></i></span> <span>Suman Gurung</span>  </p>
+            <p class="articleDate"> <span><i class="far fa-clock"></i></span> <span>September 12, 2020</span></p>
+        </div>
+
+        <div class="article_details">
+            <a href="{%url "blog-details" "blog-details"%}"><img loading="lazy" src="{%static "images/thumbnails/4.jpg"%}" alt=""></a> 
+            <div>
+                <p>  Most people want to change at least one thing in their life. But it can be challenging to find the motivation just to make a start. It helps to understand what motivation means to you so you can find your own ways to get motivated.</p>
+                <a href="{%url "blog-details" "blog-details"%}" class="more">Read more</a>
+            </div>
+        </div>
+
+    </article>
+
+    <article class="articleCard">
+
+        <h2><a href="{%url "blog-details" "blog-details"%}" class="classTitle">Motivation: How to get started and staying motivated</a></h2>
+        <div class="author_details">
+            <p> <span><i class="far fa-user"></i></span> <span>Suman Gurung</span>  </p>
+            <p class="articleDate"> <span><i class="far fa-clock"></i></span> <span>September 12, 2020</span></p>
+        </div>
+
+        <div class="article_details">
+            <a href="{%url "blog-details" "blog-details"%}"><img loading="lazy" src="{%static "images/thumbnails/5.jpg"%}" alt=""></a> 
+            <div>
+                <p>  Most people want to change at least one thing in their life. But it can be challenging to find the motivation just to make a start. It helps to understand what motivation means to you so you can find your own ways to get motivated.</p>
+                <a href="{%url "blog-details" "blog-details"%}" class="more">Read more</a>
+            </div>
+        </div>
+
+    </article>
+  
+   </div>
+
+   <div class="adsSection">
+
+    <div class="adsContainer_mini">
+     <!-- <p>Ads Section</p> -->
+     <!-- <img src="{%static "images/thumbnails/ads2.png"%}" alt=""> -->
+     <lottie-player src="https://assets1.lottiefiles.com/packages/lf20_wbvgzbuk.json"  background="transparent"  speed="1"  style="width: 300px; height: 300px;"  loop  autoplay></lottie-player>
+     
+    </div>
+
+    <p style="font-weight: 600;margin: 1rem 0;">Tags</p>
+    <div class="tags">
+        <a href="">Happy Life</a>
+        <a href="">Rich</a>
+        <a href="">Health</a>
+        <a href="">Jokes</a>
+        <a href="">Friends</a>
+        <a href="">Animals</a>
+    </div>
+
+   </div>
+
+</section>
+
+<h3 class="title__">Words from world's inspirational personalities</h3>
+
+<div class="personsSection" >
+
+
+<div class="list1">
+
+ <a href="{%url "quote-category" "sayings-by-famous-peoples"%}"> Abdul Qadeer Khan </a>
+ <a href=""> Abraham Lincoln </a>
+ <a href=""> Albert Camus </a>
+ <a href=""> Alexander Pope </a>
+ <a href=""> Alexander the Great </a>
+ <a href=""> George Bernard Shaw </a>
+ <a href=""> Johann Wolfgang von Goethe </a>
+ <a href=""> H. L. Mencken </a>
+ <a href=""> John Muir </a>
+ <a href=""> Lucius Annaeus Seneca </a> 
+ <a href=""> Robin Williams </a>
+ <a href=""> Nelson Mandela </a>
+ <a href=""> Sigmund Freud </a>
+ <a href=""> Ronald Reagan </a>
+ <a href=""> Rabindranath Tagore </a>
+
+</div>
+
+
+<div class="list2">
+
+ <a href=""> Abdul Qadeer Khan </a>
+ <a href=""> Abraham Lincoln </a>
+ <a href=""> Albert Camus </a>
+ <a href=""> Alexander Pope </a>
+ <a href=""> Alexander the Great </a>
+ <a href=""> George Bernard Shaw </a>
+ <a href=""> Johann Wolfgang von Goethe </a>
+ <a href=""> H. L. Mencken </a>
+ <a href=""> John Muir </a>
+ <a href=""> Lucius Annaeus Seneca </a> 
+ <a href=""> Robin Williams </a>
+ <a href=""> Nelson Mandela </a>
+ <a href=""> Sigmund Freud </a>
+ <a href=""> Ronald Reagan </a>
+ <a href=""> Rabindranath Tagore </a>
+
+</div>
+
+
+<div class="list3">
+
+ <a href=""> Voltaire </a>
+ <a href=""> Thomas Sowell </a>
+ <a href=""> Les Brown </a>
+ <a href=""> Juice Wrld </a>
+ <a href=""> Steve Jobs </a>
+ <a href=""> George Bernard Shaw </a>
+ <a href=""> Johann Wolfgang von Goethe </a>
+ <a href=""> H. L. Mencken </a>
+ <a href=""> Julius Caesar </a>
+ <a href=""> Lucius Annaeus Seneca </a> 
+
+</div>
+
+<div class="list4">
+<!-- <p>Ads Section</p> -->
+<!-- <img src="{%static "images/thumbnails/ads3.jpg"%}" alt=""> -->
+<lottie-player src="https://assets6.lottiefiles.com/packages/lf20_mfxcee5x.json"  background="transparent"  speed="1"  style="width: 300px; height: 300px;"  loop  autoplay></lottie-player>
+</div>
+
+</div>
+{%endblock%}
+
+{%block myscript%}
+<script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+<script>
+
+    //quote category
+    var categorys = document.querySelectorAll(".categoryBox")
+    categorys.forEach((category)=> {
+	var slug = category.getAttribute("data-category")
+    category.addEventListener("click",()=>{
+        window.location.href="/quotes/"+slug
+    });
+    });
+
+
+    //quote detail
+    var quotes = document.querySelectorAll(".quote section")
+    quotes.forEach((quote)=> {
+	var slug = quote.getAttribute("data-quote-slug")
+    quote.addEventListener("click",(e)=>{
+        window.location.href="/quote/"+slug
+    });
+    });
+
+</script>
+{%endblock%}

@@ -1,0 +1,84 @@
+{%extends "base.html"%}
+{%load static%}
+
+{%block title%}Motivative Quotes{%endblock%}
+
+{%block styles%}<link rel="stylesheet" href="{%static "styles/blogDetails.css"%}?{% now "U" %}">{%endblock%}
+
+{%block mainContent%}
+<article class="myArticle">
+
+  <h1 class="titleofblog">8 Basic Psychology Facts You Need to Know 8 Basic Psychology Facts You Need to Know</h1>
+
+  <div class="author_details">
+    <p> <span><i class="far fa-user"></i></span> <span>Suman Gurung</span>  </p>
+    <p class="articleDate"> <span><i class="far fa-clock"></i></span> <span>September 12, 2020</span></p>
+  </div>
+
+
+  <img class="featuredImg" src="https://images.unsplash.com/photo-1593642702909-dec73df255d7?ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80" alt="">
+{{blog.tags}}
+  <div class="mainBody" id="articleID">
+    {{blog.body|safe}}
+
+
+    <div class="commentBox">
+      <h2>Comments</h2>
+      <div id="disqus_thread"></div>
+<script>
+    /**
+    *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+    *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
+    /*
+    var disqus_config = function () {
+    this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+    this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+    */
+    (function() { // DON'T EDIT BELOW THIS LINE
+    var d = document, s = d.createElement('script');
+    s.src = 'https://motivativequotes.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();
+  </script>
+  </div>
+
+  <div class="relatedPosts">
+    <h2>Related Posts</h2>
+  </div>
+
+  </div>
+
+
+  <div class="social_shares">
+    <a href="#"><i class="fab fa-facebook-f"></i></a>
+    <a href="#"><i class="fab fa-instagram"></i></a>
+    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+    <a href="#"><i class="fab fa-twitter"></i></a>
+
+  </div>
+
+
+
+
+</article>
+{%endblock%}
+
+
+{%block myscript%}
+<script>
+  window.addEventListener("scroll",()=>{
+  var bar = window.scrollY
+  var share = document.querySelector(".social_shares")
+  var heightOfDoc = document.getElementById('articleID'). offsetHeight;
+    if( bar > 230 && bar < heightOfDoc){
+    share.style.cssText = "position:fixed;";
+   }
+   else{
+    share.style.cssText = "position:absolute;";
+   }
+  })
+ 
+</script>
+{%endblock%}

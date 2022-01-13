@@ -1,0 +1,108 @@
+{%extends "base.html"%}
+{%load static%}
+{%block title%}Motivative Quotes{%endblock%}
+
+{%block styles%}<link rel="stylesheet" href="{%static "styles/quoteMaker.css"%}?{% now "U" %}">{%endblock%}
+
+{%block mainContent%}
+
+<div class="mainEditContainer">
+   <div class="myArticle">
+    <div class="quoteImg">
+        <div class="overlay"></div>
+        <img class="featuredImage" src="https://images.unsplash.com/photo-1497561813398-8fcc7a37b567?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="">
+        <div class="txt">
+        <h1>
+           <span class="quote__">If you want to live a happy life, tie it to a goal, not to people or things.</span> 
+            <br> <br>
+            <span class="author__">- Ray Goforth</span>
+        </h1>
+        </div>
+    </div>
+    </div> 
+
+    <div class="edit">
+
+        <div class="editOptions">
+
+            <h3>Enter your quote</h3>
+            <div class="slidecontainer">
+                <input type="text" id="quote_id">
+            </div>
+
+            <h3>Author</h3>
+            <div class="slidecontainer">
+                <input type="text" id="author_id">
+            </div>
+
+            <h3>Background Blur</h3>
+            <div class="slidecontainer">
+                <input type="range" min="0" max="15" value="2" class="slider" id="blurRange">
+            </div>
+
+            <h3>Overlay Color</h3>
+            <div class="slidecontainer">
+                <input type="color" value="#000000" class="slider1" id="colorSelector">
+                <span id="colorShow">#000000</span>
+            </div>
+
+            <h3>Overlay Opacity</h3>
+            <div class="slidecontainer">
+                <input type="range" min="0" max="10" value="7" class="slider" id="overLayRange">
+            </div>
+
+
+        </div>
+
+        <div class="buttons">
+            <!-- <button>Copy <i class="far fa-copy"></i></button> -->
+            <button class="secondbtn_">Download Image <i class="fas fa-download"></i></button>
+        </div>
+
+    </div>
+</div>
+
+{%endblock%}
+
+
+
+{%block myscript%}
+
+<script>
+    var blurValue = document.getElementById("blurRange")
+    var opacityValue = document.getElementById("overLayRange")
+    var colorValue = document.getElementById("colorSelector")
+    var quoteInput = document.getElementById("quote_id")
+    var authorInput = document.getElementById("author_id")
+    var image = document.querySelector(".featuredImage")
+    var overlay = document.querySelector(".overlay")
+    var colorShow = document.getElementById("colorShow")
+    var quote = document.querySelector(".quote__")
+    var author = document.querySelector(".author__")
+
+
+    blurValue.addEventListener("change",(e)=>{
+        image.style.filter=`blur(${e.target.value}px)`
+    })
+
+    colorValue.addEventListener('input',(e)=>{
+        overlay.style.background=e.target.value
+        colorShow.textContent=e.target.value
+    })
+
+    opacityValue.addEventListener("change",(e)=>{
+        console.log(e.target.value)
+        overlay.style.opacity=e.target.value/10
+    })
+
+    quoteInput.addEventListener("keyup",(e)=>{
+        quote.textContent=e.target.value
+    })
+
+    authorInput.addEventListener("keyup",(e)=>{
+        author.textContent=  e.target.value
+    })
+
+</script>
+
+{%endblock%}

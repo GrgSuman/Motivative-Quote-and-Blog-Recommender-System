@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+{%load static%}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+    {%block title%}
+    {%endblock%} 
+    </title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500&family=PT+Sans:wght@400;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{%static "styles/base.css"%}?{% now "U" %}">
+    {%block styles%}
+    {%endblock%}
+</head>
+<body>
+
+
+
+<!-- ======================header starts============================================ -->
+<header>
+        <h1 style="position: relative;"> <a href="{%url "index"%}"> <span><span class="big">M</span><span class="small">OTIVATIVE</span><span class="big">Q</span><span class="small">UOTES</span></span> <img style="position: absolute;top: -5px;" src="{%static "images/category/l.png"%}" alt="motivative quotes logo" height="35px">  </a></h1>
+        <nav>
+            <ul class="big_nav">
+                <li><a href="">Trending</a></li>
+                <li><a href="">Popular</a></li>
+                <li><a href="">Quote of the Day</a></li>
+                <li><a href="{%url "quote-maker"%}">Quote Maker</a></li>
+                <li><a href="">Blog</a></li>
+
+            </ul> 
+        </nav>  
+</header>
+<!-- ==============================header ends================================================ -->
+
+
+{%block mainContent%}
+{%endblock%}
+
+
+  
+<!-- ======================footer===================================== -->
+<footer>
+
+    <div class="logo_quote">
+        <!-- <h2> <a href="{%url "index"%}"> <span class="big">M</span><span class="small">OTIVATIVE</span><span class="big">Q</span><span class="small">UOTES🥰 </span> </a></h2> -->
+        <h2 style="position: relative;"> <a href="{%url "index"%}"> <span><span class="big">M</span><span class="small">MOTIVATIVE</span><span class="big">Q</span><span class="small">UOTES</span></span> <img style="position: absolute;top: -5px;" src="{%static "images/category/l.png"%}" alt="motivative quotes logo" height="35px">  </a></h2>
+
+        <p>Work until your bank account looks like a phone number.</p>
+        
+    </div>
+
+
+    <div class="site_links">
+    <h3>Links</h3>
+    <a href="{%url "contact"%}">Contact Us</a>
+    <a href="">Sitemap</a>    
+    <a href="">Privacy Policy</a>    
+    </div>
+
+
+    <div class="connect_us">
+    <h3>Follow us on social media</h3>
+    <div class="socials">
+    <a href=""><i class="fab fa-facebook-square"></i></a>
+    <a href=""><i class="fab fa-instagram"></i></a>
+    <a href=""><i class="fab fa-youtube"></i></a>
+    </div>
+    
+    </div>
+
+</footer>
+<!-- ==============footer end========================================= -->
+
+{%block myscript%}
+{%endblock%}
+
+</body>
+</html>

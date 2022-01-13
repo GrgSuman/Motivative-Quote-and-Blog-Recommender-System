@@ -1,0 +1,39 @@
+{%extends "base.html"%}
+{%load static%}
+
+{%block title%}Contact Us | Motivative Quotes{%endblock%}
+
+{%block styles%}
+<link rel="stylesheet" href="{%static "styles/contact.css"%}">
+<style>
+    body{
+        background: white!important;
+    }
+</style>
+{%endblock%}
+
+{%block mainContent%}
+<div class="contact_form">
+
+    <div class="say_hello">
+        <lottie-player src="https://assets3.lottiefiles.com/packages/lf20_3vbOcw.json"  background="transparent"  speed="1"  style="width: 300px; height: 300px;"  loop  autoplay></lottie-player>
+    </div>
+
+
+    <form action="" method="POST">
+        <h1 class="get__">Get in Touch</h1>
+        {%csrf_token%}
+      <input type="text" placeholder="Name" name="full_name" required>
+      <input type="email" placeholder="Email" name="email" required>
+      <input type="phone" placeholder="Phone" name="phone">
+      <textarea  id="" cols="30" rows="10" placeholder="Your message" name="message" required></textarea>
+        <button class="submit" type="submit" style="float: right;padding: 10px 20px;">Submit <i style="margin-left: 5px;" class="fas fa-paper-plane"></i></button>
+    </form>
+</div>
+{%endblock%}
+
+
+{%block myscript%}
+<script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+{%endblock%}
+
