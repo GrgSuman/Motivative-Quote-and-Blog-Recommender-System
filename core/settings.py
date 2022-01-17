@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'quotesandblogs'
 ]
 
+# @sumangrg@111
+
 
 TINYMCE_DEFAULT_CONFIG = {
     "height": "320px",
@@ -92,10 +94,21 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'sumangur_motivativequotes',
+        'USER': 'sumangur_motivativequotes',
+        'PASSWORD': 'tttXiFdB2fWH9ay',
+        'HOST': 'suman-gurung.com.np',
+        'PORT': '3306',
     }
 }
 
