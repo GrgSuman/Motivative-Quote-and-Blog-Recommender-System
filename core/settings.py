@@ -101,17 +101,27 @@ WSGI_APPLICATION = 'core.wsgi.application'
 #     }
 # }
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'sumangur_motivativequotes',
+#         'USER': 'sumangur_motivativequotes',
+#         'PASSWORD': 'tttXiFdB2fWH9ay',
+#         'HOST': 'suman-gurung.com.np',
+#         'PORT': '3306',
+#     }
+# }
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'sumangur_motivativequotes',
-        'USER': 'sumangur_motivativequotes',
-        'PASSWORD': 'tttXiFdB2fWH9ay',
-        'HOST': 'suman-gurung.com.np',
+        'USER': 'root',
+        'PASSWORD': '1010',
+        'HOST': 'localhost',
         'PORT': '3306',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators

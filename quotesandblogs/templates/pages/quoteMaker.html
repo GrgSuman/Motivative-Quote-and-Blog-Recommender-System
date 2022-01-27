@@ -7,19 +7,6 @@
 {%block mainContent%}
 
 <div class="mainEditContainer">
-   <div class="myArticle">
-    <div class="quoteImg">
-        <div class="overlay"></div>
-        <img class="featuredImage" src="https://images.unsplash.com/photo-1497561813398-8fcc7a37b567?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="">
-        <div class="txt">
-        <h1>
-           <span class="quote__">If you want to live a happy life, tie it to a goal, not to people or things.</span> 
-            <br> <br>
-            <span class="author__">- Ray Goforth</span>
-        </h1>
-        </div>
-    </div>
-    </div> 
 
     <div class="edit">
 
@@ -35,11 +22,6 @@
                 <input type="text" id="author_id">
             </div>
 
-            <h3>Background Blur</h3>
-            <div class="slidecontainer">
-                <input type="range" min="0" max="15" value="2" class="slider" id="blurRange">
-            </div>
-
             <h3>Overlay Color</h3>
             <div class="slidecontainer">
                 <input type="color" value="#000000" class="slider1" id="colorSelector">
@@ -52,6 +34,13 @@
             </div>
 
 
+            <h3>Select your own image</h3>
+            <div class="image__">
+                <input type="file" accept="image/*" style="display: none;" name="image" id="file"  onchange="loadFile(event)">
+                <img id="output_" alt="">
+                <p> <i class="far fa-images"></i> Select your own background image</p>
+            </div>
+
         </div>
 
         <div class="buttons">
@@ -60,6 +49,40 @@
         </div>
 
     </div>
+
+    <div class="myArticle">
+
+        <div class="textEditor edit_quote_ active_">
+            <select name="" class="fonts_list" id="fonts_list_quote"></select>
+            <button class="decFont">-</button><input class="showSize" type="text"><button class="incFont">+</button>
+            <button class="alignLeft"><i class="fas fa-align-left"></i></button> <button class="alignCenter"><i class="fas fa-align-center"></i></button><button class="alignRight"><i class="fas fa-align-right"></i></button>
+            <button class="fontColor cs_quote">A</button>
+            <input type="color" class="selectColor" value="#ffffff">
+            <button class="fontBold">B</button>
+            <button class="fontItalic">I</button>
+        </div>
+
+        <div class="textEditor edit_author_">
+            <select name="" class="fonts_list" id="fonts_list_author"></select>
+            <button class="decFont">-</button><input class="showSize" type="text"><button class="incFont">+</button>
+            <button class="alignLeft"><i class="fas fa-align-left"></i></button> <button class="alignCenter"><i class="fas fa-align-center"></i></button><button class="alignRight"><i class="fas fa-align-right"></i></button>
+            <button class="fontColor cs_author">A</button>
+            <input type="color" class="selectColor" value="#ffffff">
+            <button class="fontBold">B</button>
+            <button class="fontItalic">I</button>
+        </div>
+
+        <div class="quoteImg" id="capture">
+            <div class="overlay"></div>
+            <img class="featuredImage" src="https://images.unsplash.com/photo-1497561813398-8fcc7a37b567?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="">
+            <div class="txt">
+              <section>
+               <p class="quote__ ">If you want to live a happy life, tie it to a goal, not to people or things.</p> 
+                <p class="author__">- Ray Goforth</p>
+              </section>
+            </div>
+        </div>
+        </div> 
 </div>
 
 {%endblock%}
@@ -67,42 +90,8 @@
 
 
 {%block myscript%}
-
-<script>
-    var blurValue = document.getElementById("blurRange")
-    var opacityValue = document.getElementById("overLayRange")
-    var colorValue = document.getElementById("colorSelector")
-    var quoteInput = document.getElementById("quote_id")
-    var authorInput = document.getElementById("author_id")
-    var image = document.querySelector(".featuredImage")
-    var overlay = document.querySelector(".overlay")
-    var colorShow = document.getElementById("colorShow")
-    var quote = document.querySelector(".quote__")
-    var author = document.querySelector(".author__")
-
-
-    blurValue.addEventListener("change",(e)=>{
-        image.style.filter=`blur(${e.target.value}px)`
-    })
-
-    colorValue.addEventListener('input',(e)=>{
-        overlay.style.background=e.target.value
-        colorShow.textContent=e.target.value
-    })
-
-    opacityValue.addEventListener("change",(e)=>{
-        console.log(e.target.value)
-        overlay.style.opacity=e.target.value/10
-    })
-
-    quoteInput.addEventListener("keyup",(e)=>{
-        quote.textContent=e.target.value
-    })
-
-    authorInput.addEventListener("keyup",(e)=>{
-        author.textContent=  e.target.value
-    })
-
-</script>
-
+<script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+<script src="{%static "quoteMaker.js"%}?{% now "U" %}"></script>
 {%endblock%}
+
+

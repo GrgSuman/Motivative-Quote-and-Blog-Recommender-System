@@ -3,28 +3,45 @@
 
 {%block title%}Motivative Quotes{%endblock%}
 
-{%block styles%}<link rel="stylesheet" href="{%static "styles/blogDetails.css"%}?{% now "U" %}">{%endblock%}
+{%block styles%}
+<link rel="stylesheet" href="{%static "styles/blogDetails.css"%}?{% now "U" %}">
+<link rel="stylesheet" href="{%static "styles/blogs.css"%}?{% now "U" %}">
+{%endblock%}
 
 {%block mainContent%}
 <article class="myArticle">
 
-  <h1 class="titleofblog">8 Basic Psychology Facts You Need to Know 8 Basic Psychology Facts You Need to Know</h1>
+  <h1 class="titleofblog" id="top">{{blog.title}}</h1>
 
   <div class="author_details">
-    <p> <span><i class="far fa-user"></i></span> <span>Suman Gurung</span>  </p>
-    <p class="articleDate"> <span><i class="far fa-clock"></i></span> <span>September 12, 2020</span></p>
+    <p> <span><i class="far fa-user"></i></span> <span>{{blog.author}}</span>  </p>
+    <p class="articleDate"> <span><i class="far fa-clock"></i></span> <span>{{blog.createdAt|date}}</span></p>
+    <p><span>{{blog.mainCategory}}</span></p>
   </div>
 
 
-  <img class="featuredImg" src="https://images.unsplash.com/photo-1593642702909-dec73df255d7?ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80" alt="">
-{{blog.tags}}
+  <img class="featuredImg" src="{{blog.featuredImage.url}}" alt="">
   <div class="mainBody" id="articleID">
-    {{blog.body|safe}}
+    <div class="stylelinks_">
+      {{blog.body|safe}}
+    </div>
 
+    <div class="claps__" data-blog-id = {{blog.id}}>
+    <img src="{%static "images/clapping.png"%}" alt="">
+    <p class="blogLikeCount">{{blog.claps}}</p>
+    </div>
+    <audio id="audio" src="{%static "audioo.mp3"%}"></audio>
 
     <div class="commentBox">
       <h2>Comments</h2>
-      <div id="disqus_thread"></div>
+    <div id="disqus_thread"></div>
+
+    <a href="#top" style="color: white;">
+<div class="claps_">
+     <i class="fas fa-arrow-up"></i> 
+    </div>
+    </a> 
+    
 <script>
     /**
     *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
@@ -44,23 +61,29 @@
   </script>
   </div>
 
+  <h2>Related Posts</h2>
   <div class="relatedPosts">
-    <h2>Related Posts</h2>
+    {%for blog in related%}
+  <article>
+    <a href="{%url "blog-details" blog.slug%}"> <img class="art_img" src="{{blog.featuredImage.url}}" alt="{{blog.title}}"></a>
+      <a class="tags">{{blog.mainCategory}}</a>
+      <a class="title_link" href="{%url "blog-details" blog.slug%}">{{blog.title}}</a> 
+</article>
+{%empty%}
+<p>Posts related to this article appears here!</p>
+{%endfor%}
   </div>
 
   </div>
 
 
-  <div class="social_shares">
+  <!-- <div class="social_shares">
     <a href="#"><i class="fab fa-facebook-f"></i></a>
     <a href="#"><i class="fab fa-instagram"></i></a>
     <a href="#"><i class="fab fa-linkedin-in"></i></a>
     <a href="#"><i class="fab fa-twitter"></i></a>
 
-  </div>
-
-
-
+  </div> -->
 
 </article>
 {%endblock%}
@@ -68,17 +91,26 @@
 
 {%block myscript%}
 <script>
-  window.addEventListener("scroll",()=>{
-  var bar = window.scrollY
-  var share = document.querySelector(".social_shares")
-  var heightOfDoc = document.getElementById('articleID'). offsetHeight;
-    if( bar > 230 && bar < heightOfDoc){
-    share.style.cssText = "position:fixed;";
-   }
-   else{
-    share.style.cssText = "position:absolute;";
-   }
-  })
- 
+  function play() {
+    var audio = document.getElementById("audio");
+    audio.currentTime = 0
+    audio.play();
+  }
+
+  //like quote
+  const blogToLike = document.querySelector(".claps__")
+  const blogLikeCount = document.querySelector(".blogLikeCount")
+
+  blogToLike.addEventListener("click",(e)=>{
+        const id = blogToLike.getAttribute("data-blog-id")
+        const likeBlog = async (quoteID) =>{
+        const res = await fetch("http://127.0.0.1:8000/blog/clap-blog/"+quoteID)
+        const data = await res.json()
+        blogLikeCount.textContent=data.claps
+    } 
+    likeBlog(id)
+    play()
+  });
+
 </script>
 {%endblock%}

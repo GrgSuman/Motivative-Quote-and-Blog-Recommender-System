@@ -4,7 +4,7 @@
 {%block title%}Contact Us | Motivative Quotes{%endblock%}
 
 {%block styles%}
-<link rel="stylesheet" href="{%static "styles/contact.css"%}">
+<link rel="stylesheet" href="{%static "styles/contact.css"%}?{% now "U" %}">
 <style>
     body{
         background: white!important;
@@ -23,12 +23,11 @@
     <form action="" method="POST">
         <h1 class="get__">Get in Touch</h1>
         {%csrf_token%}
-      <input type="text" placeholder="Name" name="full_name" required>
-      <input type="email" placeholder="Email" name="email" required>
-      <input type="phone" placeholder="Phone" name="phone">
-      <textarea  id="" cols="30" rows="10" placeholder="Your message" name="message" required></textarea>
+        {{form.as_p}}
         <button class="submit" type="submit" style="float: right;padding: 10px 20px;">Submit <i style="margin-left: 5px;" class="fas fa-paper-plane"></i></button>
     </form>
+
+    
 </div>
 {%endblock%}
 

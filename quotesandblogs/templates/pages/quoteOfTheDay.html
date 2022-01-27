@@ -1,0 +1,50 @@
+{%extends "base.html"%}
+{%load static%}
+
+{%block title%}Motivative Quotes - Quote of the day{%endblock%}
+
+{%block styles%}
+<link rel="stylesheet" href="{%static "styles/quoteOfTheDay.css"%}?{% now "U" %}">
+<style>
+
+</style>
+{%endblock%}
+
+{%block mainContent%}
+
+<div class="quoteToTheDay">
+    <div class="day_quote">
+      <h1 class="quotee">{{quote}}</h1>
+      <p><span class="authh"> - {{author}}</span></p>
+      <section class="loader disable"><div class="pulsing-2"></div></section>
+      <button class="button_ ">Generate next <i class="fas fa-sync" style="margin-left: 10px;font-size: medium;"></i></button>
+    </div>
+</div>
+
+{%endblock%}
+
+
+{%block myscript%}
+<script>
+    const button = document.querySelector('.button_')
+    const loader = document.querySelector('.loader')
+  
+
+    button.addEventListener('click',()=>{
+        button.classList.add('disable')
+        loader.classList.remove('disable')
+        setTimeout(()=>{
+            const likeQuote = async () =>{
+            const res = await fetch("http://127.0.0.1:8000/motivativequotes/give-me-quote/")
+            const data = await res.json()
+            button.classList.remove('disable')
+            loader.classList.add('disable')
+            document.querySelector(".quotee").textContent = data.quote
+            document.querySelector(".authh").textContent = data.author ? '- '+data.author : ""
+            } 
+            likeQuote()
+        },1000)
+    })
+
+</script>
+{%endblock%}

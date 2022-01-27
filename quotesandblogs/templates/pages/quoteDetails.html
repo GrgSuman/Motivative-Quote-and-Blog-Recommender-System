@@ -6,22 +6,77 @@
 
 {%block mainContent%}
 <article class="myArticle">
-<div class="quoteImg">
+<div class="quoteImg" id="capture">
     <div class="overlay"></div>
-    <img class="featuredImage" src="https://images.unsplash.com/photo-1497561813398-8fcc7a37b567?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="">
+    <img class="featuredImage" src= {{quote.backgroundImage.url}} alt="">
     <div class="txt">
     <h1>
-        There are two types of people who will tell you that you cannot make a difference in this world: those who are afraid to try and those who are afraid you will succeed.
+        {{quote.quote}}
         <br> <br>
-          - Ray Goforth
+          -  {{quote.author}}
     </h1>
     </div>
 </div>
 <div class="buttons">
-    <button>Copy <i class="far fa-copy"></i></button>
+    <button class="copy_ animate__animated" data-quote-text= "{{quote.quote}}">Copy <i class="far fa-copy"></i></button>
     <button class="secondbtn_">Download Image <i class="fas fa-download"></i></button>
-    <button >Edit Quote <i class="fas fa-edit"></i></button>
+    <button class="edit_">Edit Quote <i class="fas fa-edit"></i></button>
 </div>
 </article>
 
+{%endblock%}
+
+
+{%block myscript%}
+<script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+<script>
+    document.querySelector(".secondbtn_").addEventListener('click',()=>{
+        html2canvas(document.querySelector("#capture")).then(canvas => {
+        var a = document.createElement('a');
+        a.href = canvas.toDataURL("image/jpeg").replace("image/jpeg", "image/octet-stream");
+        a.download = 'quote.jpg';
+        a.click();
+        });  
+    })
+
+    //copy quote
+    const quoteToCopy = document.querySelectorAll(".copy_")
+    quoteToCopy.forEach((x)=> {
+	const text = x.getAttribute("data-quote-text")
+    x.addEventListener("click",(e)=>{
+        x.classList.add('animate__tada')
+        navigator.clipboard.writeText(text);
+        setTimeout(()=>{
+        x.classList.remove('animate__tada')
+        },500)
+    });
+    });
+
+
+    //take to editor section
+    const edit = document.querySelector(".edit_")
+    const imageData = {
+        quote : "{{quote.quote}}",
+        author : "{{quote.author}}",
+        backgroundImage : "{{quote.backgroundImage.url}}",
+        overLayColor : '#000000',
+        overLayOpacity : '2',
+        fontFamilyQuote : 'Kalam',
+        fontFamilyAuthor : 'Kalam',
+        quoteFontSize : '40',
+        authorFontSize : '24',
+        quoteAlignment : 'center',
+        authorAlignment : 'center',
+        quoteFontColor : '#ffffff',
+        authorFontColor : '#ffffff',
+        quoteFontBold : '400',
+        authorFontBold : '400',
+        quoteFontItalic : 'normal',
+        authorFontItalic : 'normal'
+    }
+    edit.addEventListener('click',()=>{
+        window.localStorage.setItem('imageData',JSON.stringify(imageData))
+        window.location.href = "/motivativequotes/quote-maker/"
+    })
+</script>
 {%endblock%}

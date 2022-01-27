@@ -12,7 +12,6 @@ class QuotesCategory(models.Model):
         return self.name
 
 
-
 class BlogsCategory(models.Model):
     name = models.CharField(max_length=50,unique=True)
     slug = models.SlugField(default="")
@@ -52,6 +51,11 @@ class Blog(models.Model):
     def __str__(self):
         return self.title
 
+class Contact(models.Model):
+    full_name=models.CharField(max_length=100)
+    email=models.EmailField()
+    phone=models.IntegerField(null=True)
+    message=models.TextField()
 
 class SubscriberEmail(models.Model):
 

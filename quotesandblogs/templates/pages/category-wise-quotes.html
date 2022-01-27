@@ -12,86 +12,23 @@
 <h3 class="title___">{{category}} Quotes</h3>
 <main class="lovedquotes">
  
+    {%for quote in allquotes%}
     <div class="quote">
-    <section class="quoteWithImage"  data-quote-slug="quote-slug">
+    <section class="quoteWithImage"  data-quote-slug={{quote.slug}}>
      <img src="{%static "images/category/left-quote.png"%}" alt="" class="quoteImg">
-     <p class="myquote">"Opportunities don't happen. You create them."</p>
+     <audio src="{%static "audio.mp3"%}"></audio>
+     <p class="myquote">{{quote.quote}}</p>
     </section>
      <div class="copylike">
-        <button class="like_">15K <i class="far fa-heart"></i> </button>
-        <button class="copy_">COPY <i class="far fa-copy"></i>  </button>
+        <button class="like_" data-quote-id={{quote.id}}><span>{{quote.likes}}</span>  <i class="far fa-heart"></i> </button>
+        <button class="copy_ animate__animated" data-quote-text= "{{quote.quote}}" >COPY <i class="far fa-copy"></i>  </button>
     </div>
+    <audio id="audio" src="{%static "audio.mp3"%}"></audio>
     </div>
-    
-    <div class="quote">
-    <section class="quoteWithImage"  data-quote-slug="quote-slug">
-     <img src="{%static "images/category/left-quote.png"%}" alt="" class="quoteImg">
-     <p class="myquote">"Try not to become a man of success. Rather become a man of value."</p>
-    </section>
-     <div class="copylike">
-         <button class="like_">105K <i class="far fa-heart"></i> </button>
-         <button class="copy_">COPY <i class="far fa-copy"></i> </button>
-     </div>
-    </div>
+    {%empty%}
+    <h3 style="margin-bottom:30vh;font-weight: 500;">Quotes related to this category will be available soon.</h3>
+    {%endfor%}
 
-    <div class="quote">
-    <section class="quoteWithImage"  data-quote-slug="quote-slug">
-     <img src="{%static "images/category/left-quote.png"%}" alt="" class="quoteImg">
-     <p class="myquote">"When something is important enough, you do it even if the odds are not in your favor."</p>
-    </section>
-     <div class="copylike">
-        <button class="like_">198K <i class="far fa-heart"></i> </button>
-        <button class="copy_">COPY <i class="far fa-copy"></i> </button>
-    </div>
-    </div>
-
-    <div class="quote">
-    <section class="quoteWithImage"  data-quote-slug="quote-slug">
-     <img src="{%static "images/category/left-quote.png"%}" alt="" class="quoteImg">
-     <p class="myquote">"True happiness is not expensive. If it requires high price it’s a fake."</p>
-    </section>
-     <div class="copylike">
-        <button class="like_">105K <i class="far fa-heart"></i> </button>
-        <button class="copy_">COPY <i class="far fa-copy"></i> </button>
-    </div>
-    </div>
-
-
-    <div class="quote">
-     <section class="quoteWithImage" data-quote-slug="quote-slug">
-     <img src="{%static "images/category/left-quote.png"%}" alt="" class="quoteImg">
-     <p class="myquote">"The secret of success is to know something nobody else knows."</p>
-     </section>
-     <div class="copylike">
-        <button class="like_">157K <i class="far fa-heart"></i> </button>
-        <button class="copy_">COPY <i class="far fa-copy"></i> </button>
-    </div>
-    </div>
-
-
-    <div class="quote">
-        <section  class="quoteWithImage"  data-quote-slug="quote-slug">
-        <img src="{%static "images/category/left-quote.png"%}" alt="" class="quoteImg">
-        <p class="myquote">"Don’t raise your voice, Improve your argument."</p>
-        </section>
-        <div class="copylike">
-           <button class="like_">1K <i class="far fa-heart"></i> </button>
-           <button class="copy_">COPY <i class="far fa-copy"></i> </button>
-       </div>
-       </div>
-
-
-       <div class="quote">
-        <section class="quoteWithImage" data-quote-slug="quote-slug">
-        <img src="{%static "images/category/left-quote.png"%}" alt="" class="quoteImg">
-        <p class="myquote">"If you want to make your dreams come true, The first thing you have to do is wake up."</p>
-        </section>
-        
-        <div class="copylike">
-           <button class="like_">17K <i class="far fa-heart"></i> </button>
-           <button class="copy_">COPY <i class="far fa-copy"></i> </button>
-       </div>
-       </div>
 </main>
 {%endblock%}
 
@@ -99,12 +36,50 @@
 {%block myscript%}
 <script>
     //quote detail
-    var quotes = document.querySelectorAll(".quote section")
+    const quotes = document.querySelectorAll(".quote section")
     quotes.forEach((quote)=> {
-	var slug = quote.getAttribute("data-quote-slug")
+	const slug = quote.getAttribute("data-quote-slug")
     quote.addEventListener("click",(e)=>{
         window.location.href="/quote/"+slug
     });
     });
+
+    function play() {
+        var audio = document.getElementById("audio");
+        audio.currentTime = 0
+        audio.play();
+      }
+
+
+    //like quote
+    const quoteToLike = document.querySelectorAll(".like_")
+    quoteToLike.forEach((x)=> {
+	const id = x.getAttribute("data-quote-id")
+    x.addEventListener("click",(e)=>{
+        const likeQuote = async (quoteID) =>{
+        const res = await fetch("http://127.0.0.1:8000/quote/like-quote/"+quoteID)
+        const data = await res.json()
+        x.firstElementChild.textContent=data.likes
+    } 
+        likeQuote(id)
+        play()
+    });
+    });
+
+    //copy quote
+    const quoteToCopy = document.querySelectorAll(".copy_")
+    quoteToCopy.forEach((x)=> {
+	const text = x.getAttribute("data-quote-text")
+    x.addEventListener("click",(e)=>{
+        x.classList.add('animate__tada')
+        navigator.clipboard.writeText(text);
+        setTimeout(()=>{
+        x.classList.remove('animate__tada')
+        },500)
+    });
+    });
+
+  
+
 </script>
 {%endblock%}

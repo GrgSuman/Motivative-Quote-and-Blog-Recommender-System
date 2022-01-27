@@ -23,14 +23,18 @@
 
    <div class="adsSection">
 
-    <form action="" class="search_form">
-        <input type="text" placeholder="funny quotes..">
-        <button><i class="fas fa-search"></i> </button>
-    </form>
+    <section class="search">
+        <form action="">
+           <i class="material-icons">search</i>
+            <input type="text" required placeholder="Search..">
+        </form>
+        
+       </section>
 
     <div class="adsContainer">
         <!-- <img src="{%static "images/thumbnails/ads.png"%}" alt=""> -->
-        <lottie-player src="https://assets2.lottiefiles.com/private_files/lf30_hlzxxlfs.json"  background="transparent"  speed="1"  style="width: 300px; height: 300px;"  loop  autoplay></lottie-player>
+        <lottie-player src="https://assets7.lottiefiles.com/private_files/lf30_uqcbmc4h.json"  background="transparent"  speed="1"  style="width: 300px; height: 300px;"  loop  autoplay></lottie-player>
+       
     </div>
 
    </div>
@@ -41,16 +45,17 @@
 <section class="newsletter">
     <h3>Subscribe to us</h3>
     <p>Stay motivated, get daily quotes straight to your email for free</p>
-    <form action="" class="newsForm">
-        <input type="text" placeholder="Your name">
-        <input type="email" placeholder="Your favourite email">
+    <form action="/" class="newsForm" method="POST">
+        {%csrf_token%}
+        <input type="text" required name='name' placeholder="Your name">
+        <input type="email" required name="email" placeholder="Your favourite email">
         <button type="submit">Subscribe</button>
     </form>
 </section>
 
 <!-- Most Loved Quotes -->
 
-<h3 class="title__">Most Loved Quotes</h3>
+<h3 class="title__">Recommended Quotes</h3>
 
 <main class="lovedquotes">
  
@@ -147,98 +152,27 @@
 <section class="myCategoriesList">
 
    <div class="commonDivs">
+    {%for blog in recentBlogs%}
 
     <article class="articleCard">
 
-        <h2><a href="{%url "blog-details" "blog-details"%}" class="classTitle">Motivation: How to get started and staying motivated</a></h2>
+        <h2><a href="{%url "blog-details" blog.slug%}" class="classTitle">{{blog.title}}</a></h2>
         <div class="author_details">
-            <p> <span><i class="far fa-user"></i></span> <span>Suman Gurung</span>  </p>
-            <p class="articleDate"> <span><i class="far fa-clock"></i></span> <span>September 12, 2020</span></p>
+            <p> <span><i class="far fa-user"></i></span> <span>{{blog.author}}</span>   </p>
+            <p class="articleDate"> <span><i class="far fa-clock"></i></span> <span>{{blog.createdAt|date:'F j, Y'}} </span></p>
         </div>
 
         <div class="article_details">
-            <a href="{%url "blog-details" "blog-details"%}"><img loading="lazy" src="{%static "images/thumbnails/1.jpg"%}" alt=""></a> 
+            <a href="{%url "blog-details" blog.slug%}"><img loading="lazy" src="{{blog.featuredImage.url}}" alt=""></a> 
             <div>
-                <p>  Most people want to change at least one thing in their life. But it can be challenging to find the motivation just to make a start. It helps to understand what motivation means to you so you can find your own ways to get motivated.</p>
-                <a href="{%url "blog-details" "blog-details"%}" class="more">Read more</a>
+                <p>  {{blog.metaDesc}} ...</p>
+                <a href="{%url "blog-details" blog.slug%}" class="more">Read more</a>
             </div>
         </div>
 
     </article>
 
-
-    <article class="articleCard">
-
-        <h2><a href="{%url "blog-details" "blog-details"%}" class="classTitle">Motivation: How to get started and staying motivated</a></h2>
-        <div class="author_details">
-            <p> <span><i class="far fa-user"></i></span> <span>Suman Gurung</span>  </p>
-            <p class="articleDate"> <span><i class="far fa-clock"></i></span> <span>September 12, 2020</span></p>
-        </div>
-
-        <div class="article_details">
-           <a href="{%url "blog-details" "blog-details"%}"><img loading="lazy" src="{%static "images/thumbnails/2.jpg"%}" alt=""></a> 
-            <div>
-                <p>  Most people want to change at least one thing in their life. But it can be challenging to find the motivation just to make a start. It helps to understand what motivation means to you so you can find your own ways to get motivated.</p>
-                <a href="{%url "blog-details" "blog-details"%}" class="more">Read more</a>
-            </div>
-        </div>
-
-    </article>
-
-    <article class="articleCard">
-
-        <h2><a href="{%url "blog-details" "blog-details"%}" class="classTitle">Motivation: How to get started and staying motivated</a></h2>
-        <div class="author_details">
-            <p> <span><i class="far fa-user"></i></span> <span>Suman Gurung</span>  </p>
-            <p class="articleDate"> <span><i class="far fa-clock"></i></span> <span>September 12, 2020</span></p>
-        </div>
-
-        <div class="article_details">
-            <a href="{%url "blog-details" "blog-details"%}"><img loading="lazy" src="{%static "images/thumbnails/3.jpg"%}" alt=""></a> 
-            <div>
-                <p>  Most people want to change at least one thing in their life. But it can be challenging to find the motivation just to make a start. It helps to understand what motivation means to you so you can find your own ways to get motivated.</p>
-                <a href="{%url "blog-details" "blog-details"%}" class="more">Read more</a>
-            </div>
-        </div>
-
-    </article>
-
-    <article class="articleCard">
-
-        <h2><a href="{%url "blog-details" "blog-details"%}" class="classTitle">Motivation: How to get started and staying motivated</a></h2>
-        <div class="author_details">
-            <p> <span><i class="far fa-user"></i></span> <span>Suman Gurung</span>  </p>
-            <p class="articleDate"> <span><i class="far fa-clock"></i></span> <span>September 12, 2020</span></p>
-        </div>
-
-        <div class="article_details">
-            <a href="{%url "blog-details" "blog-details"%}"><img loading="lazy" src="{%static "images/thumbnails/4.jpg"%}" alt=""></a> 
-            <div>
-                <p>  Most people want to change at least one thing in their life. But it can be challenging to find the motivation just to make a start. It helps to understand what motivation means to you so you can find your own ways to get motivated.</p>
-                <a href="{%url "blog-details" "blog-details"%}" class="more">Read more</a>
-            </div>
-        </div>
-
-    </article>
-
-    <article class="articleCard">
-
-        <h2><a href="{%url "blog-details" "blog-details"%}" class="classTitle">Motivation: How to get started and staying motivated</a></h2>
-        <div class="author_details">
-            <p> <span><i class="far fa-user"></i></span> <span>Suman Gurung</span>  </p>
-            <p class="articleDate"> <span><i class="far fa-clock"></i></span> <span>September 12, 2020</span></p>
-        </div>
-
-        <div class="article_details">
-            <a href="{%url "blog-details" "blog-details"%}"><img loading="lazy" src="{%static "images/thumbnails/5.jpg"%}" alt=""></a> 
-            <div>
-                <p>  Most people want to change at least one thing in their life. But it can be challenging to find the motivation just to make a start. It helps to understand what motivation means to you so you can find your own ways to get motivated.</p>
-                <a href="{%url "blog-details" "blog-details"%}" class="more">Read more</a>
-            </div>
-        </div>
-
-    </article>
-  
+    {%endfor%}
    </div>
 
    <div class="adsSection">
@@ -263,6 +197,8 @@
    </div>
 
 </section>
+
+
 
 <h3 class="title__">Words from world's inspirational personalities</h3>
 

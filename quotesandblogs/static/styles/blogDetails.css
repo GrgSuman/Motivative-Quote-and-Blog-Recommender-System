@@ -1,9 +1,12 @@
 .myArticle{
-    margin: 0 25%;
+    margin: 0 20%;
     background-color: white;
     padding: 2rem 0;
-    padding-top: 3rem;
+    padding-top: 5rem;
 }
+html {
+    scroll-behavior: smooth;
+  }
 
 .myArticle h1,.myArticle h2, .myArticle h3, .myArticle h4{
     margin: 1rem 0;
@@ -11,8 +14,9 @@
 }
 
 .titleofblog{
-    text-align: center;
+    /* text-align: center; */
     font-size: 2rem;
+    padding-left: 5%;
 }
 
 .author_details{
@@ -61,7 +65,8 @@
     color: #1b1818d1;
 }
 
-.mainBody a{
+
+.stylelinks_ a{
     font-size: 1.2rem;
     color: #1b1818d1;
     background: linear-gradient(to right, #7f7fd5, #86a8e7, #91eae4);
@@ -70,7 +75,7 @@
     background-position: 0 88%;
     transition: background-size 0.25s ease-in;
 }
-.mainBody a:hover{
+.stylelinks_ a:hover{
     background-size: 100% 88%;
 }
 
@@ -123,3 +128,34 @@
     color: white;
   }
   
+.claps_{
+    height:40px;
+    width: 40px;
+    background-color: #3524b5;
+    position: fixed;
+    bottom:10%;
+    right: 15%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+  
+.claps__{
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    margin-top: 2rem;
+    width: fit-content;
+}
+.claps__ img{
+    height: 40px!important;
+    width: 40px!important;
+}
+
+.claps__ p{
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-left: 1.5rem;
+}

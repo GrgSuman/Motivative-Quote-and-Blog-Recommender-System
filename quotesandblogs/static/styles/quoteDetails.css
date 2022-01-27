@@ -19,7 +19,7 @@
     height: 100%;
     width: 100%;
     background:black;
-    opacity: 0.6;
+    opacity: 0.7;
     z-index: 1;
 }
 
@@ -34,6 +34,7 @@
 .txt{
    /* color: #f6e266; */
    color: white;
+   font-family: 'Kalam', cursive;
    z-index: 5;
    position: absolute;
    height: 100%;
@@ -47,8 +48,9 @@
 }
 
 .txt h1{
+    font-family: 'Kalam', cursive;
     width: 80%;
-    font-size: 1.6rem;
+    font-size: 1.8rem;
     line-height: 1.2em;
     font-weight: 500;
     height: fit-content;
@@ -79,5 +81,4 @@
     cursor: pointer;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
-
 

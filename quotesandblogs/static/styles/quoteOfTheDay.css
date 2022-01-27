@@ -1,0 +1,92 @@
+header,footer,.logo_quote a{
+    background: #1a1922!important;
+    color: white;
+}
+
+.socials a,.site_links a,.logo_quote p{
+    color: rgba(255, 255, 255, 0.842);
+}
+.quoteToTheDay{
+    height: 100vh;
+    width: 100%;
+    background: black;
+    display: flex;
+    justify-content: center;
+}
+
+.day_quote{
+    margin-top: 8%;
+    min-height: 50vh;
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    color: white;
+}
+
+.disable{
+    display: none!important;
+}
+
+.day_quote h1{
+    font-size: 2.5rem;
+    line-height: 1.6em;
+    /* font-family: 'Berkshire Swash', cursive; */
+    font-family: 'Kalam', cursive;
+}
+
+.day_quote p{
+    font-size: 1.5rem;
+    margin: 2rem 0;
+    font-family: 'Kalam', cursive;
+}
+
+.day_quote button{
+    background-color: white;
+    color: rgba(0, 0, 0, 0.829);
+    padding: 1rem;
+    margin-right: 15%;
+    margin-top: 3rem;
+    border-radius: 40px;
+    border: none;
+    outline: none;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.day_quote button:hover{
+    cursor: pointer;
+}
+
+.day_quote section{
+    display: flex;
+    justify-content: center;
+    margin-right: 15%;
+}
+
+
+.pulsing-2 {
+    margin-top: 3rem;
+    width:20px;
+    height:20px;
+    border-radius: 50%;
+    background:rgb(255, 255, 255);
+    box-shadow: 0 0 0 0 rgba(204, 190, 190, 0.267);
+    animation:pl2 1.5s infinite linear;
+    position: relative;
+  }
+  .pulsing-2:before,
+  .pulsing-2:after {
+    content:"";
+    position: absolute;
+    inset:0;
+    border-radius: inherit;
+    box-shadow: 0 0 0 0 rgba(206, 192, 192, 0.267);
+    animation: inherit;
+    animation-delay: -0.5s;
+  }
+  .pulsing-2:after {
+    animation-delay: -1s;
+  }
+  @keyframes pl2 {
+      100% {box-shadow: 0 0 0 100px rgba(255, 255, 255, 0)}
+  }
