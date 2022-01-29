@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            height: 100vh;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .rectangle{
+            width: 800px;
+            height: 600px;
+            border: 1px solid red;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+
+        .square{
+            width: 60px;
+            height: 60px;
+            background: green;
+            position: absolute;
+            top: calc(50% - 30px);
+            left: 0;
+        }
+
+        .animate{animation: square_animation 5s infinite ease;}
+
+        .active{display: block;}
+        .disable{display: none;}
+
+        @keyframes square_animation {
+
+            0%{
+                top: calc(50% - 30px);;
+                left: 0;
+            }
+            25%{
+                top: calc(100% - 60px);
+                left: calc(50% - 30px);
+            }
+
+            50%{
+                top: calc(50% - 30px);;
+                left:calc(100% - 60px);
+            }
+
+             75%{
+                top: 0;
+                left:calc(50% - 30px);
+            }
+
+            100%{
+                top: calc(50% - 30px);;
+                left: 0;
+            } 
+             
+        }
+
+    </style>
+</head>
+<body>
+
+
+<div class="rectangle">
+    <div class="square">
+    </div>
+    <button class="rotate">ROTATE CUBE</button>
+    <button class="stop disable">STOP CUBE</button>
+</div>
+
+
+<script>
+    const square = document.querySelector('.square')
+    const btn1 = document.querySelector('.rotate')
+    const btn2 = document.querySelector('.stop')
+
+    btn1.addEventListener('click',()=>{
+        square.classList.add('animate')
+        btn1.classList.add('disable')
+        btn2.classList.remove('disable')
+    })
+    btn2.addEventListener('click',()=>{
+        square.classList.remove('animate')
+        btn1.classList.remove('disable')
+        btn2.classList.add('disable')
+    })
+
+</script>
+    
+</body>
+</html>

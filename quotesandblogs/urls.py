@@ -10,6 +10,9 @@ urlpatterns = [
     #like quote
     path("quote/like-quote/<int:id>",views.LikeQuote,name='like-quote'),
 
+    #copied quote to session
+    path("quote/copy/<int:id>",views.CopyQuoteToSession),
+
     #clap blog
     path("blog/clap-blog/<int:id>",views.ClapBlog,name='clap-blog'),
 
@@ -22,4 +25,6 @@ urlpatterns = [
     path("motivativequotes/contact/",views.ContactView.as_view(),name="contact"),
     path("motivativequotes/error/",views.errorPage,name="error"),
     path("motivativequotes/quote-maker/",views.QuoteMaker.as_view(),name="quote-maker"),
+    path("motivativequotes/search/",views.searchResults,name="search"),
+
 ]

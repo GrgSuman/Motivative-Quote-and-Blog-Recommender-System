@@ -131,7 +131,7 @@ html {
 .claps_{
     height:40px;
     width: 40px;
-    background-color: #3524b5;
+    background-color: #0000009c;
     position: fixed;
     bottom:10%;
     right: 15%;
@@ -148,6 +148,9 @@ html {
     align-items: center;
     margin-top: 2rem;
     width: fit-content;
+}
+.claps_:hover{
+    background: black;
 }
 .claps__ img{
     height: 40px!important;

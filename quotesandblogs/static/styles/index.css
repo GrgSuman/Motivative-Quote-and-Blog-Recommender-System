@@ -152,12 +152,14 @@
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-gap: 2rem;
+    margin-bottom: 4rem;
 }
 
 .quote{
     border-radius: 10px;
     background: white;
-    height:180px;
+    min-height: 180px;
+    padding-bottom: 1rem;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
     position: relative;
 }

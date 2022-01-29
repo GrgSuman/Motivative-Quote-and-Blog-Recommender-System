@@ -18,7 +18,7 @@
     </div>
 </div>
 <div class="buttons">
-    <button class="copy_ animate__animated" data-quote-text= "{{quote.quote}}">Copy <i class="far fa-copy"></i></button>
+    <button class="copy_ animate__animated" data-quote-id={{quote.id}} data-quote-text= "{{quote.quote}}">Copy <i class="far fa-copy"></i></button>
     <button class="secondbtn_">Download Image <i class="fas fa-download"></i></button>
     <button class="edit_">Edit Quote <i class="fas fa-edit"></i></button>
 </div>
@@ -43,12 +43,17 @@
     const quoteToCopy = document.querySelectorAll(".copy_")
     quoteToCopy.forEach((x)=> {
 	const text = x.getAttribute("data-quote-text")
+	const id = x.getAttribute("data-quote-id")
     x.addEventListener("click",(e)=>{
         x.classList.add('animate__tada')
         navigator.clipboard.writeText(text);
         setTimeout(()=>{
         x.classList.remove('animate__tada')
         },500)
+        const CopyQuote = async (quoteID) =>{
+           await fetch("http://127.0.0.1:8000/quote/copy/"+quoteID)
+       } 
+       CopyQuote(id)
     });
     });
 

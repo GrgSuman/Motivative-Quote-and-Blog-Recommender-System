@@ -9,19 +9,60 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.views.generic import CreateView
 from .forms import ContactForm
 import re
+import pandas as pd
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.metrics.pairwise import linear_kernel
+
 
 regex = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
-
-
 
 class HomeView(View):
     def get(self,request):
         myCategories = QuotesCategory.objects.all()
         recentBlogs = Blog.objects.filter(postStatus=True).order_by('-id')
-        print(recentBlogs)
+
+        #recommender logic starts
+        allquotes = Quote.objects.all().values().filter(postStatus=True)
+        data = pd.DataFrame(list(allquotes))
+        recommendedQuotes = {}
+        recommendedQuotesQuerySet = []
+
+        quoteTitle = ""
+        userCopiedQUote = getSessionValue(request,'copiedQuoteByUser')
+        userLikedQuote = getSessionValue(request,'likedQuoteByUser')
+        userVisitedQuoteDetail = getSessionValue(request,'userVisitedDetail')
+        userVisitedQuoteCategory = getSessionValue(request,'userVisitedQuoteCategory')
+
+        #copied quote has high priority
+        #copied > liked > visited detail of specific quote > visited category
+        if userCopiedQUote:
+            quoteTitle = userCopiedQUote
+        elif userLikedQuote:
+            quoteTitle = userLikedQuote
+        elif userVisitedQuoteDetail:
+            quoteTitle = userVisitedQuoteDetail
+        elif userVisitedQuoteCategory:
+            quoteTitle = userVisitedQuoteCategory
+        
+        if quoteTitle !="":
+            recommendedQuotes = quote_recommender(quoteTitle,data).head(8).to_dict()
+            for quote in recommendedQuotes:
+                qt = Quote.objects.get(quote=recommendedQuotes[quote])
+                recommendedQuotesQuerySet.append(qt)
+        else:
+            quoteList = []
+            while len(quoteList) < 8:
+                i = random.randint(0,len(allquotes))
+                if Quote.objects.filter(id=i).exists():
+                    qt = Quote.objects.get(id=i)
+                    if not qt in quoteList:
+                        quoteList.append(qt)
+            recommendedQuotesQuerySet = quoteList
+
         context={
             "myCategories" : myCategories,
-            'recentBlogs' : recentBlogs
+            'recentBlogs' : recentBlogs,
+            'recommendedQuotes' : recommendedQuotesQuerySet
         }
         return render(request,'pages/index.html',context)
     
@@ -47,8 +88,16 @@ class QuoteCategoryView(View):
     def get(self,request,quotesCategory):
         try:
             category = QuotesCategory.objects.get(slug=quotesCategory)
+            quotesWithThisCategory = category.quotescategory.all().filter(postStatus=True).order_by('-id')
+            i = random.randint(0,len(quotesWithThisCategory))
+            if Quote.objects.filter(id=i).exists():
+                quote = Quote.objects.get(id=i)
+                setSessionValue(request,'userVisitedQuoteCategory',quote.quote) 
+            else:
+                setSessionValue(request,'userVisitedQuoteCategory',quotesWithThisCategory[0].quote)
+
             context = {
-                "allquotes" : category.quotescategory.all().filter(postStatus=True),
+                "allquotes" : quotesWithThisCategory,
                 'category' : category
             }
             return render(request,"pages/category-wise-quotes.html",context)
@@ -64,15 +113,17 @@ class BlogCategoryView(View):
 
 class QuoteDetail(View):
     def get(self,request,quoteDetail):
-        # try:
+        try:
             quote = Quote.objects.get(slug=quoteDetail)
+            setSessionValue(request,'userVisitedDetail',quote.quote)
+
             context = {
                 'quote' : quote
             }
             return render(request,"pages/quoteDetails.html",context)
 
-        # except:
-        #     return redirect('index')
+        except:
+            return redirect('index')
 
 
 class BlogDetail(View):
@@ -110,6 +161,15 @@ class ContactView(SuccessMessageMixin,CreateView):
 class QuoteMaker(View):
     def get(self,request):
         return render(request,"pages/quoteMaker.html")
+
+
+def searchResults(request):
+    blogs = Blog.objects.filter(title__icontains=request.GET['q'])
+    context={
+       "blogs":blogs,
+        "total":len(blogs),
+    }
+    return render(request,"pages/search.html",context)
 
 
 class QuoteOfTheDay(View):
@@ -153,7 +213,13 @@ def LikeQuote(request,id):
     quote.likes += 1
     likes = quote.likes
     quote.save()
+    setSessionValue(request,'likedQuoteByUser',quote.quote)
     return JsonResponse({'likes':likes})
+
+def CopyQuoteToSession(request,id):
+    quote = Quote.objects.get(id=id)
+    setSessionValue(request,'copiedQuoteByUser',quote.quote)
+    return JsonResponse({})
 
 def ClapBlog(request,id):
     blog = Blog.objects.get(id=id)
@@ -176,3 +242,24 @@ def GiveMeQuote(request):
         'author' : quoteOfTheDay.author
     }
     return JsonResponse(context)
+
+def getSessionValue(request,key):
+    return request.session.get(key)
+
+def setSessionValue(request,key,value):
+    request.session[key] = value
+
+def quote_recommender(quote,data):
+    dataset = data
+    dataset = dataset[['quote','keywords']]
+    tf = TfidfVectorizer(analyzer='word', ngram_range=(1, 3), min_df=0, stop_words='english')
+    matrix = tf.fit_transform(dataset['keywords'])
+    cosine_similarities = linear_kernel(matrix,matrix)
+    quote_title = dataset['quote']
+    indices = pd.Series(dataset.index, index=dataset['quote'])
+    idx = indices[quote]
+    sim_scores = list(enumerate(cosine_similarities[idx]))
+    sim_scores = sorted(sim_scores, key=lambda x: x[1], reverse=True)
+    sim_scores = sim_scores[1:30]
+    quote_indices = [i[0] for i in sim_scores]
+    return quote_title.iloc[quote_indices]

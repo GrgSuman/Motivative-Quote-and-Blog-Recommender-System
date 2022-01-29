@@ -1,0 +1,121 @@
+{%extends "base.html"%}
+{%load static%}
+
+
+{%block title%}
+<title>
+Find out the best articles related to motivation.
+</title>
+{%endblock%}
+
+{%block styles%}
+<style>
+    .searchRes{
+        display: flex;
+        padding: 1rem 12%;
+        color: #48525C;
+        align-items: center;
+        margin-top:2rem;
+    }
+
+    .bigSearch{
+        min-height: 50vh;
+    }
+
+
+  .bigSearch h2{
+      margin-bottom: 2rem;
+  }
+
+
+    .bigSearch form input{
+        padding: 1rem 5rem;
+        background: hsl(0deg 0% 71% / 30%);
+        border: 1px solid rgba(0, 0, 0, 0);
+        outline: none;
+        border-radius: 5px;
+        width: 80%;
+        font-size: 0.9rem;
+
+    }
+    .bigSearch form input:focus{
+        border: 1px solid black;
+    }
+    .bigSearch form input::placeholder{
+        font-size: 0.9rem;
+    }
+    .bigSearch form{
+        position: relative;
+        width: 100%;
+        margin: 1rem 0;
+    }
+    .bigSearch form i{
+        position: absolute;
+        top:28%;
+        left: 2rem;
+        color: #48525cde;   
+    }
+
+    @media(max-width:1300px){
+    }
+
+    @media(max-width:600px){
+        
+    .bigSearch form input{
+        width:100%;
+    }
+    }
+        
+
+</style>
+<link rel="stylesheet" href="{%static "styles/blogs.css"%}?{% now "U" %}">
+{%endblock%}
+
+
+
+
+{%block mainContent%}
+
+<div class="the_main_top">
+
+<div class="searchRes">
+<h2 class="latest">Your search results :</h2>
+<h2 style="margin-left: 1rem;font-size: 2rem;">{{total}}</h2>
+</div>
+
+<div class="articles">
+
+    {%for blog in blogs%}
+<article>
+    <a href="{%url "blog-details" blog.slug%}"> <img class="art_img" src="{{blog.featuredImage.url}}" alt="{{blog.title}}"></a>
+    <a class="tags">{{blog.mainCategory}}</a>
+    <a class="title_link" href="{%url "blog-details" blog.slug%}">{{blog.title}}</a> 
+    <p class="views">
+        <span style="display: flex;align-items: center;">
+        <span class="material-icons-outlined">visibility</span> 
+        <span style="margin-left: 0.5rem;">{{blog.claps}}</span>
+        </span>
+        <span class="spacing_">/</span>
+        <span>{{blog.createdAt|date}}</span>        
+        <span class="spacing_">/</span>
+        <span>BY ADMIN</span>
+    </p>
+</article>
+
+{%empty%}
+
+<script>document.querySelector('.articles').style.display='block'</script>
+<div class="bigSearch">
+    <h2>No search results 😢, you can search below</h2>
+    <form action="{%url 'search'%}">
+     <i class="material-icons">search</i>
+        <input name='q' type="text" required placeholder="Eg. Earn money" autofocus>
+    </form>
+ </div>
+{%endfor%}
+
+</div>
+
+</div>
+{%endblock%}
+

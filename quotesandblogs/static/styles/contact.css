@@ -34,10 +34,24 @@
     width: 100%;
 }
 
+.contact_form form p{
+    position: relative;
+  }
+
+.contact_form form input:focus::placeholder{
+    color: transparent;
+  
+}
+
 .contact_form form input:focus{
     border-bottom: 2px solid #3524b5;
   
 }
+
+
+
+
+
 .contact_form form textarea{
     margin:10px 0;
     padding: 10px 20px;
