@@ -1,8 +1,7 @@
 .myArticle{
     margin: 0 20%;
     background-color: white;
-    padding: 2rem 0;
-    padding-top: 5rem;
+    padding: 2rem;
 }
 html {
     scroll-behavior: smooth;
@@ -14,15 +13,12 @@ html {
 }
 
 .titleofblog{
-    /* text-align: center; */
     font-size: 2rem;
-    padding-left: 5%;
 }
 
 .author_details{
     display: flex;
     margin: 0.5rem 0;
-    padding-left: 5%;
 }
 
 .author_details i{
@@ -38,13 +34,13 @@ html {
 
 .featuredImg{
     width: 100%;
-    padding: 1rem 5%;
+    margin: 1rem 0;
 }
 
 .mainBody{
     line-height: 1.8em;
     text-align: justify;
-    padding:2rem 5%;
+    padding:2rem 0;
     padding-top: 0;
 }
 
@@ -162,3 +158,24 @@ html {
     font-weight: bold;
     margin-left: 1.5rem;
 }
+
+
+@media (max-width:1300px){
+    .myArticle {
+        margin: 0 3%;
+    }
+    .claps_ {
+        right: 3%;
+    }
+
+  }
+
+  @media (max-width:450px){
+   .myArticle{
+       padding: 1rem;
+   }
+   .mainBody p, .mainBody a {
+    font-size: 1.1rem;
+}
+}
+

@@ -328,3 +328,122 @@ width: 100%;
     height: 100%;
     width: 100%;
 }
+
+.edit__all{
+    display: none;
+}
+
+
+@media (max-width:1300px){
+    .mainEditContainer {
+        margin: 0 3%;
+    }
+    .myArticle{
+        margin-right: 0;
+    }
+  }
+
+  @media (max-width:1100px){
+   .edit{
+       display: none;
+   }
+  }
+
+  @media (max-width:768px){
+    .edit{
+        display: none;
+    }
+    .mainEditContainer {
+        margin:2rem 0;
+        margin-top: 0;
+        padding: 1rem;
+    }
+    .myArticle{
+       padding: 0;
+       position: relative;
+    }
+    .textEditor{
+        justify-content: space-between;
+        padding: 0.5rem;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        overflow-x: scroll;
+    }
+    .textEditor::-webkit-scrollbar {
+        height: 2px;
+      }
+ 
+      /* Handle */
+      .textEditor::-webkit-scrollbar-thumb {
+        background: #888; 
+      }
+
+    .quoteImg{
+       margin-top: 60px;
+    }
+    .fontBold{
+        margin-left: 0;
+    }
+
+    .edit__all{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 40px;
+        width: 40px;
+        background-color: #3524b5;
+        color: white;
+        border-radius: 50%;
+        color: white;
+        position: absolute;
+        bottom: 10px;
+        right: 3%;
+        z-index: 8;
+        cursor: pointer;
+    }
+
+    .edit{
+        position: fixed;
+        top: 30%;
+        height: calc(100vh - 30%);
+        overflow-y: scroll;
+        left: 0;
+        width: 100%;
+        z-index: 10;
+        background: white;
+        border-top: 6px solid #3524b5;
+        border-top-left-radius: 25px;
+        border-top-right-radius: 25px;
+    }
+    .edit::-webkit-scrollbar {
+        width: 2px;
+      }
+ 
+      /* Handle */
+      .edit::-webkit-scrollbar-thumb {
+        background: #888; 
+      }
+
+
+    .layer_edit{
+        height: 50vh;
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100%;
+        z-index: 10;
+        background: #00000091;
+        display: none;
+    }
+   }
+
+   @media (max-width:600px){
+    .quoteImg{
+       height: 375px;
+     }
+     .mainEditContainer{
+         padding: 1rem 0.5rem;
+     }
+   }

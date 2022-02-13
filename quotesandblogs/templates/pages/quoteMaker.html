@@ -7,8 +7,10 @@
 {%block mainContent%}
 
 <div class="mainEditContainer">
+    <div class="layer_edit"></div>
 
     <div class="edit">
+
 
         <div class="editOptions">
 
@@ -82,8 +84,19 @@
               </section>
             </div>
         </div>
+
+        <div class="edit__all">
+            <span class="material-icons">edit</span>
+        </div>
+
+        <div class="edit__all download_"  style="left: 3%;">
+            <span class="material-icons"> download </span>
+        </div>
         </div> 
 </div>
+
+
+
 
 {%endblock%}
 
@@ -92,6 +105,19 @@
 {%block myscript%}
 <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
 <script src="{%static "quoteMaker.js"%}?{% now "U" %}"></script>
+<script>
+    const layerEdt = document.querySelector('.layer_edit')
+    const editMenu = document.querySelector('.edit')
+    const showEdit = document.querySelector('.edit__all')
+        layerEdt.addEventListener('click',()=>{
+          editMenu.style.display='none'
+          layerEdt.style.display='none'
+        })
+        showEdit.addEventListener('click',()=>{
+          editMenu.style.display='block'
+          layerEdt.style.display='block'
+        })
+</script>
 {%endblock%}
 
 

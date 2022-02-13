@@ -264,15 +264,24 @@
         window.localStorage.setItem('imageData',JSON.stringify(imageData))
     }
 
-    //download image
-    document.querySelector(".secondbtn_").addEventListener('click',()=>{
+
+    const downloadImage_ = ()=>{
         html2canvas(document.querySelector("#capture")).then(canvas => {
         var a = document.createElement('a');
         a.href = canvas.toDataURL("image/jpeg").replace("image/jpeg", "image/octet-stream");
         a.download = 'quote.jpg';
         a.click();
         });  
-    })
+    } 
+    
+    //download image
+    document.querySelector(".secondbtn_").addEventListener('click',downloadImage_)
+
+    //download image
+    try{    document.querySelector(".download_").addEventListener('click',downloadImage_)}
+    catch(e){}
+
+    
 
 
     // *************************font family options and set in select field******************************

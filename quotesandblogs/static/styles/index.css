@@ -52,7 +52,8 @@
 
 .categoryBox h3{
     font-weight: 400;
-    margin: 0.5rem 0;
+    margin: 1rem 0;
+    margin-bottom: 0.5rem;
 }
 
 .adsContainer{
@@ -148,7 +149,6 @@
 
 .lovedquotes{
     margin: 2rem 12%;
-    width: calc(100% - 24%);
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-gap: 2rem;
@@ -246,7 +246,6 @@
 .personsSection{
     margin: 2rem 12%;
     background: white;
-    height: 80vh;
     width:calc(100% - 24%);
     padding: 2rem;
     display: grid;
@@ -313,6 +312,7 @@
 .article_details{
     display: flex;
     margin: 0.5rem 0;
+    align-items: center;
 }
 .article_details img{
     height: 120px;
@@ -360,3 +360,123 @@
 .tags a:hover{
     background: aliceblue;
 }
+
+.mob_add{
+    display: none;
+}
+
+
+@media (max-width:1300px){
+    .myCategoriesList {
+        padding: 0 3%;
+    }
+    .newsletter {
+        margin: 2rem 3%;
+    }
+    .lovedquotes {
+        margin: 2rem 3%;
+    }
+    .personsSection {
+        margin: 0rem 3%;
+        margin-bottom: 2rem;
+        width: calc(100% - 6%);
+        padding: 2rem 1rem;
+    }
+
+  }
+
+
+  @media (max-width:1100px){
+    .adsSection {
+        display: none;
+    }
+
+    .myCategoriesList {
+        margin-bottom: 2rem;
+    }
+    .commonDivs {
+        margin-right: 0;
+    }
+
+    .mob_add{
+        /* display: flex; */
+        justify-content: center;
+        align-items: center;
+        height:150px;
+        width: 94%;
+        background-color: white;
+        margin: 1rem 3%;
+    }
+    .lovedquotes {
+        grid-template-columns: 1fr 1fr;
+        grid-gap: 1rem;
+    }
+    .personsSection {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+    .list4{
+        display: none;
+    }
+
+   
+
+  }
+
+  @media (max-width:768px){
+    .gridCategory {
+        padding: 2rem;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-gap: 1.5rem;
+    }
+  }
+
+  @media (max-width:700px){
+    .lovedquotes {
+        grid-template-columns: 1fr ;
+    }
+    .article_details{
+        display: block;
+    }
+    .article_details p,.article_details img{
+        margin: 0.5rem 0;
+    }
+    .article_details img{
+        width: 100%;
+        height: auto;
+    }
+    .personsSection {
+        grid-template-columns: 1fr 1fr;
+        grid-gap: 1rem;
+    }
+  }
+
+
+
+
+  
+  @media (max-width:600px){
+    .gridCategory {
+        padding: 1rem;
+        grid-template-columns: 1fr 1fr;
+        grid-gap: 1rem;
+    }
+    .categoryBox{
+        height: 120px;
+    }
+    .title__ {
+        margin: 1.5rem 0;
+        font-size: 1.3rem;
+    }
+    .newsletter {
+        padding: 2rem 1rem;
+    }
+    .newsForm{
+        display: grid;
+    }
+    .newsForm input[type=email] {
+        margin: 1rem 0rem;
+    }
+   
+  }
+
+  

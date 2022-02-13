@@ -82,3 +82,35 @@
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
+@media (max-width:1300px){
+    .myArticle {
+        margin: 0 15%;
+    }
+  }
+
+  @media (max-width:1100px){
+    .myArticle {
+        margin: 2rem 0;
+    }
+  }
+
+
+  @media (max-width:700px){
+    .txt h1 {
+        width: 90%;
+        font-size: 1.3rem;
+        text-align: left;
+    }
+    .quoteImg {
+        height: 360px;
+    }
+    .buttons{
+        display: block;
+    }
+    .secondbtn_ {
+        margin: 0.5rem 0;
+    }
+    .buttons button {
+        padding: 0.5rem 3rem;
+    }
+  }
