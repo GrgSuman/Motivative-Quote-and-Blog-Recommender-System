@@ -98,20 +98,47 @@
     audio.play();
   }
 
-  //like quote
+  //like blog
   const blogToLike = document.querySelector(".claps__")
   const blogLikeCount = document.querySelector(".blogLikeCount")
 
   blogToLike.addEventListener("click",(e)=>{
         const id = blogToLike.getAttribute("data-blog-id")
+
         const likeBlog = async (quoteID) =>{
         const res = await fetch("http://127.0.0.1:8000/blog/clap-blog/"+quoteID)
         const data = await res.json()
         blogLikeCount.textContent=data.claps
     } 
+
     likeBlog(id)
     play()
+
+    // const getBIdsFromLS = JSON.parse(localStorage.getItem('BlogIDs'))
+    //     if(getBIdsFromLS!==null){
+    //       if(!checkIfExists(id)){
+    //         likeBlog(id)
+    //         play()
+    //         localStorage.setItem('BlogIDs',JSON.stringify([...getBIdsFromLS,id]))
+    //       }
+    //     }
+    //     else{
+    //       likeBlog(id)
+    //       play()
+    //       localStorage.setItem('BlogIDs',JSON.stringify([id]))
+    //     }
+
+   
+ 
   });
+
+  
+
+  const checkIfExists=(id)=>{
+        const getBIdsFromLS = JSON.parse(localStorage.getItem('BlogIDs'))
+        const x = getBIdsFromLS.some((x)=>x===id)
+        return x
+    }  
 
 </script>
 {%endblock%}

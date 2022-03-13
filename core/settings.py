@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'tinymce',
     'quotesandblogs'
 ]
-
+# sumangrg
 # @sumangrg@111
 
 

@@ -252,10 +252,32 @@
         const data = await res.json()
         x.firstElementChild.textContent=data.likes
        } 
-        likeQuote(id)
-        play()
+
+       likeQuote(id)
+       play()
+    //    const getQIdsFromLS = JSON.parse(localStorage.getItem('QuoteIDs'))
+    //     if(getQIdsFromLS!==null){
+    //       if(!checkIfQExists(id)){
+    //         likeQuote(id)
+    //         play()
+    //         localStorage.setItem('QuoteIDs',JSON.stringify([...getQIdsFromLS,id]))
+    //       }
+    //     }
+    //     else{
+    //       likeQuote(id)
+    //       play()
+    //       localStorage.setItem('QuoteIDs',JSON.stringify([id]))
+    //     }
+
     });
     });
+
+    const checkIfQExists= (id)=>{
+        const getQIdsFromLS =  JSON.parse(localStorage.getItem('QuoteIDs'))
+        const x = getQIdsFromLS.some((x)=>x===id)
+        return x
+    }  
+
 
     //copy quote
     const quoteToCopy = document.querySelectorAll(".copy_")
