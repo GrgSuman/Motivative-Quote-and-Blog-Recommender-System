@@ -61,6 +61,16 @@
         <div class="menu__ sh">
             <span class="material-icons"> search </span>
         </div>
+
+        <div class="auth_side">
+           {% if user.is_authenticated %}
+            <p class="login">Hey, {{user.username}}</p>
+            <p class="signup" onclick="logout()">Logout</p>
+            {% else %}
+                <p class="login loginnn">Login</p>
+                <p class="signup signupp">Signup</p>
+            {%endif%}
+        </div>
        
 </header>
 
@@ -81,16 +91,97 @@
 <!-- ==============================header ends================================================ -->
 
 {% if messages %} 
-{% for message in messages %}
 <div class="alert__box">
     <section>
         <i class="fas fa-times"></i>
+{% for message in messages %}
         <p class="{{message.tags}} alert__p">{{message}}</p>
+{% endfor %}
     </section>
       
 </div>
-{% endfor %}
 {% endif %}
+
+
+<!-- login and signup================================== -->
+<div class="main_auth_section">
+
+    <div class="auth_section">
+    <i class="fas fa-times top_right"></i>
+
+
+         <section class="form_section">
+
+        <form  id="loginForm" >
+            {%csrf_token%}
+
+        <h2 class="welcome">Good Morning! <span> login to your account</span></h2>
+
+        <p style="color: red;font-weight: bold;font-size: 14px;"  class="backErr"></p>
+
+       <p class="icon__">
+        <input required type="text" placeholder="Email or Username" name="username" class="username">
+        <i class="fas fa-user"></i>
+       </p>
+        
+        <p class="userError">Username required</p>
+        
+        <p class="icon__">
+        <input required type="password" placeholder="Password" name="password" class="password">
+        <i class="fas fa-lock"></i>
+        </p>
+        
+        <p class="passError">Password required</p>
+
+        <p class="forget_pass"><a href="">Forget password?</a></p>
+        <input required type="submit" class="login_btn" value="Login">
+        
+        <p class="signup_inc">Don't have an account? <a class="signup_ su__">Signup</a></p>
+            
+        </form>
+
+        <form  id="signupForm" >
+            {%csrf_token%}
+
+        <h2 class="welcome">Good Morning! <span> Signup and explore more content</span></h2>
+
+        
+        <p class="userError">Please fill all the fields</p>
+        <p style="color: red;font-weight: bold;font-size: 14px;"  class="backErr2"></p>
+
+       <p class="icon__">
+        <input required type="text" placeholder="Username" name="username" class="username">
+        <i class="fas fa-user"></i>
+       </p>
+        
+        
+
+        <p class="icon__">
+            <input required type="text" placeholder="Email" name="email" class="username s_email">
+            <i class="fas fa-envelope"></i>
+           </p>
+            
+        <p class="emailError">Email required</p>
+        <p class="icon__">
+        <input required type="password" placeholder="Password" name="password" class="password">
+        <i class="fas fa-lock"></i>
+        </p>
+        
+        <p class="passError">Password required</p>
+
+        <input required type="submit" class="login_btn" value="Signup">
+        
+        <p class="signup_inc">Already have an account? <a class="signup_ ln__">Login</a></p>
+            
+        </form>
+        
+        </section> 
+
+    </div>
+
+</div>
+<!-- login and signup ends================================== -->
+
 
 
 
@@ -147,6 +238,23 @@ document.querySelector(".alert__box i").addEventListener('click',()=>{
 catch{
 }
 
+try{
+    const registration = document.querySelector(".main_auth_section")
+
+const loginForm = document.querySelector("#loginForm")
+const signupForm = document.querySelector("#signupForm")
+    document.querySelector(".top_right").addEventListener("click",()=>{
+       registration.style.display="none"
+       loginForm.style.display="none"
+       signupForm.style.display="none"
+   })
+}
+catch(e){}
+
+function logout(){
+    window.location.href="/logout"
+}
+
 const menu = document.querySelector('.real_mn')
 const header = document.querySelector('.miniHeader')
 const menuDrag = document.querySelector('.real_mn_drag')
@@ -167,6 +275,126 @@ const hideMenu = ()=>{
     menu.style.display='flex'
 }
 
+</script>
+
+<script>
+
+    try{
+
+        const loginForm = document.getElementById("loginForm")
+        const signupForm = document.getElementById("signupForm")
+
+        //login details
+        const l_uname = document.querySelector("#loginForm .username")
+        const l_pass = document.querySelector("#loginForm .password")
+
+        //signup details
+        const s_uname = document.querySelector("#signupForm .username")
+        const s_email = document.querySelector("#signupForm .s_email")
+        const s_pass = document.querySelector("#signupForm .password")
+
+        loginForm.addEventListener('submit',async(e)=>{
+           e.preventDefault()
+
+            const res = await  fetch('/login',{
+                method:'POST',
+                headers:{
+                    'Content-Type':'application/json',
+                    "X-CSRFToken": "{{csrf_token}}"
+                },
+                body:JSON.stringify({
+                    username:l_uname.value,
+                    password:l_pass.value
+                })
+            })
+            const data = await res.json()
+            if(data?.status==="success"){
+                window.location.href="/"
+            }
+            else{
+                document.querySelector(".backErr").innerHTML=data.status
+                setTimeout(()=>{
+                    document.querySelector(".backErr").innerHTML=""
+                },2000)
+            }
+        })
+    
+        signupForm.addEventListener('submit',async(e)=>{
+           e.preventDefault()
+
+            const res = await  fetch('/signup',{
+                method:'POST',
+                headers:{
+                    'Content-Type':'application/json',
+                    "X-CSRFToken": "{{csrf_token}}"
+                },
+                body:JSON.stringify({
+                    username:s_uname.value,
+                    password:s_pass.value,
+                    email:s_email.value
+                })
+            })
+            const data = await res.json()
+            if(data?.status==="success"){
+                window.location.href="/"
+            }
+            else{
+                document.querySelector(".backErr").innerHTML=data.status
+                setTimeout(()=>{
+                    document.querySelector(".backErr").innerHTML=""
+                },2000)
+            }
+        })
+
+    }catch(e){}
+
+
+    try{
+
+    const loginBtn = document.querySelector(".loginnn")
+   const signupBtn = document.querySelector(".signupp")
+   const su = document.querySelector(".su__")
+   const ln = document.querySelector(".ln__")
+
+   const registration = document.querySelector(".main_auth_section")
+
+   const loginForm = document.querySelector("#loginForm")
+   const signupForm = document.querySelector("#signupForm")
+
+   
+   loginBtn.addEventListener("click",()=>{
+       registration.style.display="flex"
+       loginForm.style.display="block"
+       signupForm.style.display="none"
+   })
+
+
+   signupBtn.addEventListener("click",()=>{
+       registration.style.display="flex"
+       loginForm.style.display="none"
+       signupForm.style.display="block"
+   })
+
+   ln.addEventListener("click",()=>{
+       registration.style.display="flex"
+       loginForm.style.display="block"
+       signupForm.style.display="none"
+   })
+
+
+   su.addEventListener("click",()=>{
+       registration.style.display="flex"
+       loginForm.style.display="none"
+       signupForm.style.display="block"
+   })
+
+ 
+
+    }
+    catch(e){}
+
+
+   
 </script>
 
 </body>

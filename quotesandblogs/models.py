@@ -1,7 +1,14 @@
+from pyexpat import model
 from django.db import models
 from django.contrib.auth.models import User
 from tinymce.models import HTMLField
 
+
+class CustomUser(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    profile = models.ImageField(default="default.png",upload_to="uploads/profile")
+    active = models.BooleanField(default=False)
+    activation_key = models.CharField(max_length=255, blank=True, null=True)
 
 class QuotesCategory(models.Model):
     name = models.CharField(max_length=50,unique=True)

@@ -3,6 +3,10 @@ from .import views
 
 urlpatterns = [
     path("",views.HomeView.as_view(),name="index"),
+
+    path("signup",views.signup,name="signup"),
+    path("login",views.userLogin,name="login"),
+    path("logout",views.userLogout,name="logout"),
     
     path("quotes/<slug:quotesCategory>",views.QuoteCategoryView.as_view(),name="quote-category"),
     path("quote/<slug:quoteDetail>",views.QuoteDetail.as_view(),name="quote-details"),

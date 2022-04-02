@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import QuotesCategory,BlogsCategory,Quote,Blog,SubscriberEmail,Contact
+from .models import QuotesCategory,BlogsCategory,Quote,Blog,SubscriberEmail,Contact,CustomUser
 
 class QuotesCategoryAdmin(admin.ModelAdmin):
     model = QuotesCategory
@@ -29,6 +29,10 @@ class SubscriberEmailAdmin(admin.ModelAdmin):
 class ContactModelAdmin(admin.ModelAdmin):
     list_display=('full_name','email','phone','message')
 
+class CustomUserAdmin(admin.ModelAdmin):
+    model = CustomUser
+    list_display=('activation_key','profile','active')
+
 
 admin.site.register(QuotesCategory,QuotesCategoryAdmin)
 admin.site.register(BlogsCategory,BlogsCategoryAdmin)
@@ -36,3 +40,4 @@ admin.site.register(Quote,QuoteAdmin)
 admin.site.register(Blog,BlogAdmin)
 admin.site.register(SubscriberEmail,SubscriberEmailAdmin)
 admin.site.register(Contact,ContactModelAdmin)
+admin.site.register(CustomUser,CustomUserAdmin)

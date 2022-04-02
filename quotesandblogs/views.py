@@ -1,8 +1,9 @@
+from turtle import pos
 from django.contrib import messages
 from django.shortcuts import redirect, render
 from django.http import JsonResponse
 from django.views import View
-from .models import Blog,QuotesCategory,Quote,Contact,SubscriberEmail
+from .models import Blog,QuotesCategory,Quote,Contact,SubscriberEmail,CustomUser
 from django.core.paginator import Paginator
 import random
 from django.contrib.messages.views import SuccessMessageMixin
@@ -12,6 +13,13 @@ import re
 import pandas as pd
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import linear_kernel
+from django.contrib.auth import login,logout,authenticate
+from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserCreationForm  
+import json
+
+
+
 
 
 regex = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
@@ -263,3 +271,45 @@ def quote_recommender(quote,data):
     sim_scores = sim_scores[1:30]
     quote_indices = [i[0] for i in sim_scores]
     return quote_title.iloc[quote_indices]
+
+def signup(request):
+    if request.method == "POST":
+        post_data = json.loads(request.body.decode("utf-8"))
+        data = {
+            "username":post_data['username'],
+            "password1":post_data['password'],
+            "password2":post_data['password'],
+        }
+        fm = UserCreationForm(data)
+        
+        if fm.is_valid():
+            fm.save()
+            user = User.objects.get(username=post_data['username'])
+            user.email=post_data['email']
+            user.save()
+
+            cuser = CustomUser()
+            cuser.activation_key=1234
+            cuser.user=user
+            cuser.save()
+
+            return JsonResponse({"status":"success"})
+        else:
+            return JsonResponse(fm.errors.as_json(),safe=False)
+    return JsonResponse({"message":"hello k xa"})
+
+def userLogin(request):
+    if request.method == "POST":
+        post_data = json.loads(request.body.decode("utf-8"))
+        user = authenticate(request, username=post_data['username'], password=post_data['password'])
+        if user is not None:
+            print("yooo")
+            login(request, user)
+            return JsonResponse({"status":"success"})
+        else:
+            return JsonResponse({"status":"Invalid username and password"})
+    return JsonResponse({"message":"Hello K xa "})
+
+def userLogout(request):
+    logout(request)
+    return redirect("/")
